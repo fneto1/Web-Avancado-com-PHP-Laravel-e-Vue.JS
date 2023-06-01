@@ -34,7 +34,16 @@ Route::prefix('/app')->group(function() {
     Route::get('/produtos', function() {return "produtos";})->name('app.produtos');
 });
 
-//redirecionando rotas
+//rota de fallback
+
+Route::fallback(function(){
+    echo ' Rota inexistente. <a href="'.route('site.index').'">Clique aqui</a> para retornar a pagina inicial ';
+});
+
+//encaminhando parametros da rota para o controlador
+Route::get('/teste/{p1}/{p2}', 'TesteController@teste' )->name('teste');
+
+/* //redirecionando rotas
 Route::get('/rota1', function(){
     echo 'rota 1';
 })->name('site.rota1');
@@ -44,15 +53,7 @@ Route::get('/rota2', function(){
 })->name('site.rota2');
 
 //Route::redirect('/rota2', '/rota1');
-
-//rota de fallback
-
-Route::fallback(function(){
-    echo ' Rota inexistente. <a href="'.route('site.index').'">Clique aqui</a> para retornar a pagina inicial ';
-});
-
-
-
+ */
 
 //recebendo parametros
 
