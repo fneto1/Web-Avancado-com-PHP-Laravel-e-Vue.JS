@@ -44,14 +44,119 @@ o if executa caso o retorno da condição seja true
 {{--if(isset($variavel)) retorna true se a variavel estiver definida --}}
 
 @isset($fornecedores)
-    Fornecedor: {{$fornecedores[1]['nome']}}
-    <br>
-    Status: {{$fornecedores[1]['status']}}
-    <br>
-    @isset($fornecedores[1]['cnpj'])
-    Status: {{$fornecedores[1]['cnpj']}}
-    <br>
-    @endisset
+{{--    Fornecedor: {{$fornecedores[1]['nome']}}--}}
+{{--    <br>--}}
+{{--    Status: {{$fornecedores[1]['status']}}--}}
+{{--    <br>--}}
+{{--    @isset($fornecedores[1]['cnpj'])--}}
+{{--    CNPJ: {{$fornecedores[1]['cnpj']}}--}}
+{{--    <br>--}}
+{{--    @empty($fornecedores[1]['cnpj'])--}}
+{{--        Vazio--}}
+{{--    @endempty--}}
+{{--    @endisset--}}
+
+{{--  Operador condicional de valor default (??)  --}}
+{{--    CNPJ: {{$fornecedores[1]['cnpj'] ?? 'Não possui CNPJ'}}--}}
+{{--    <br>--}}
+{{--
+  $variavel testada não estiver definida (isset)
+  ou
+  $variavel testada ser null
+
+  --}}
+
+{{--    Telefone: ({{$fornecedores[1]['ddd'] ?? ''}}) {{$fornecedores[1]['telefone'] ?? ''}}--}}
+{{--    <br>--}}
+{{--    @switch($fornecedores[1]['ddd'])--}}
+{{--        @case('75')--}}
+{{--            Cruz das Almas - BA--}}
+{{--            @break--}}
+{{--        @case('79')--}}
+{{--            Aracaju - SE--}}
+{{--            @break--}}
+{{--        @case('11')--}}
+{{--            São Paulo - SP--}}
+{{--            @break--}}
+{{--        @default--}}
+{{--            Estado não identificado--}}
+{{--    @endswitch--}}
+
+{{--    <br><br>--}}
+
+{{--    @for($i=0; isset($fornecedores[$i]); $i++ )--}}
+{{--        Fornecedor: {{$fornecedores[$i]['nome']}}--}}
+{{--        <br>--}}
+{{--        Status: {{$fornecedores[$i]['status']}}--}}
+{{--        <br>--}}
+{{--        CNPJ: {{$fornecedores[$i]['cnpj'] ?? 'Não possui CNPJ'}}--}}
+{{--        <br>--}}
+{{--        Telefone: ({{$fornecedores[$i]['ddd'] ?? ''}}) {{$fornecedores[$i]['telefone'] ?? ''}}--}}
+{{--        <br><br>--}}
+{{--    @endfor--}}
+
+{{--    @php $i = 0 @endphp--}}
+{{--    @while(isset($fornecedores[$i]))--}}
+
+{{--                Fornecedor: {{$fornecedores[$i]['nome']}}--}}
+{{--                <br>--}}
+{{--                Status: {{$fornecedores[$i]['status']}}--}}
+{{--                <br>--}}
+{{--                CNPJ: {{$fornecedores[$i]['cnpj'] ?? 'Não possui CNPJ'}}--}}
+{{--                <br>--}}
+{{--                Telefone: ({{$fornecedores[$i]['ddd'] ?? ''}}) {{$fornecedores[$i]['telefone'] ?? ''}}--}}
+{{--                <hr>--}}
+{{--                <br>--}}
+{{--                @php $i++ @endphp--}}
+
+{{--    @endwhile--}}
+
+{{--    @foreach($fornecedores as $indice => $fornecedor)--}}
+{{--        Fornecedor: {{$fornecedor['nome']}}--}}
+{{--        <br>--}}
+{{--        Status: {{$fornecedor['status']}}--}}
+{{--        <br>--}}
+{{--        CNPJ: {{$fornecedor['cnpj'] ?? 'Não possui CNPJ'}}--}}
+{{--        <br>--}}
+{{--        Telefone: ({{$fornecedor['ddd'] ?? ''}}) {{$fornecedor['telefone'] ?? ''}}--}}
+{{--        <hr>--}}
+{{--        <br>--}}
+{{--    @endforeach--}}
+
+    @forelse($fornecedores as $indice => $fornecedor)
+                Iteração atual: {{ $loop->iteration  }}
+                <br>
+                Fornecedor: {{$fornecedor['nome']}}
+                <br>
+                Status: {{$fornecedor['status']}}
+                <br>
+                CNPJ: {{$fornecedor['cnpj'] ?? 'Não possui CNPJ'}}
+                <br>
+                Telefone: ({{$fornecedor['ddd'] ?? ''}}) {{$fornecedor['telefone'] ?? ''}}
+                <br>
+                @if($loop->first)
+                    Primeira iteração
+                @endif
+
+                @if($loop->last)
+                    Última iteração
+
+                    <br>
+                    Total de registros: {{$loop->count}}
+                @endif
+                <hr>
+                <br>
+
+    @empty
+        Não existem fornecedores cadastrados!
+    @endforelse
+
+
+
 @endisset
+
+
+
+
 
 
